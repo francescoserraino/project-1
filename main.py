@@ -1,3 +1,4 @@
+#this is a test
 # define rooms and items
 door_a = {
     "name": "door a",
