@@ -36,7 +36,7 @@ door_a = {
     "open_gif": './gifs/open_door_1.gif',
     "locked_gif": './gifs/cant_open_door.gif',
     "open_sound": './sounds/closedoor.wav',
-    "locked_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/aww.wav',
 }
 
 key_a = {
@@ -52,7 +52,7 @@ door_b = {
     "open_gif": './gifs/open_door_aggresive.gif',
     'locked_gif': './gifs/cant_open_door_2.gif',
     "open_sound": './sounds/closedoor.wav',
-    "locked_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/aww.wav',
 }
 
 key_b = {
@@ -69,7 +69,7 @@ door_c = {
     "open_gif": './gifs/storm_through_door.gif',
     "locked_gif": './gifs/cant_open_door.gif',
     "open_sound": './sounds/closedoor.wav',
-    "locked_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/aww.wav',
 }
 
 key_c = {
@@ -85,7 +85,7 @@ door_d = {
     "open_gif": './gifs/exit_house.gif',
     'locked_gif': './gifs/cant_open_door_2.gif',
     "open_sound": './sounds/closedoor.wav',
-    "locked_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/aww.wav',
 }
 
 key_d = {
@@ -99,7 +99,7 @@ couch = {
     "name": "couch",
     "type": "furniture",
     'gif': './gifs/looking_at_couch.gif',
-    "sound": "./sounds/closedoor.wav",
+    "sound": "./sounds/boring.wav",
 }
 
 piano = {
@@ -133,8 +133,8 @@ queen_bed = {
 dining_table = {
     "name": "dining table",
     "type": "furniture",
-    'gif': './gifs/check.gif',
-    "sound": "./sounds/piano.wav",
+    'gif': './gifs/check_table.gif',
+    "sound": "./sounds/crash.wav",
 }
 
 
