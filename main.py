@@ -29,106 +29,99 @@ def gif_player(animated_gif):
 
     pyglet.app.run()
 
-<<<<<<< HEAD
-gif_player(r'../gifs/check_bed')
-=======
-gif_player('/Users/uli/Documents/Bootcamp/02 Data Analytics/Week 1/project-1/gifs/cant_open_door_2.gif')
-
-
->>>>>>> ff484e7dbf2eb481585b381764a43dacf7882e36
 
 # define rooms and items
 door_a = {
     "name": "door a",
     "type": "door",
-    "open_gif": '/Users/francescoserraino/project-1/open_door_1.gif',
-    "locked_gif": '/Users/francescoserraino/project-1/cant_open_door.gif',
+    "open_gif": './open_door_1.gif',
+    "locked_gif": './cant_open_door.gif',
 }
 
 key_a = {
     "name": "key for door a",
     "type": "key",
     "target": door_a,
-    "gif": '/Users/francescoserraino/project-1/find_key.gif',
+    "gif": './find_key.gif',
 }
 
 door_b = {
     "name": "door b",
     "type": "door",
-    "open_gif": '/Users/francescoserraino/project-1/open_door_aggresive.gif',
-    'locked_gif': '/Users/francescoserraino/project-1/cant_open_door_2.gif',
+    "open_gif": './open_door_aggresive.gif',
+    'locked_gif': './cant_open_door_2.gif',
 }
 
 key_b = {
     "name": "key for door b",
     "type": "key",
     "target": door_b,
-    "gif": '/Users/francescoserraino/project-1/find_key.gif',
+    "gif": './find_key.gif',
 }
 
 
 door_c = {
     "name": "door c",
     "type": "door",
-    "open_gif": '/Users/francescoserraino/project-1/storm_through_door.gif',
-    "locked_gif": '/Users/francescoserraino/project-1/cant_open_door.gif',
+    "open_gif": './storm_through_door.gif',
+    "locked_gif": './cant_open_door.gif',
 }
 
 key_c = {
     "name": "key for door c",
     "type": "key",
     "target": door_c,
-    "gif": '/Users/francescoserraino/project-1/find_key.gif',
+    "gif": './find_key.gif',
 }
 
 door_d = {
     "name": "door d",
     "type": "door",
-    "open_gif": '/Users/francescoserraino/project-1/exit_house.gif',
-    'locked_gif': '/Users/francescoserraino/project-1/cant_open_door_2.gif',
+    "open_gif": './exit_house.gif',
+    'locked_gif': './cant_open_door_2.gif',
 }
 
 key_d = {
     "name": "key for door d",
     "type": "key",
     "target": door_d,
-    "gif": '/Users/francescoserraino/project-1/find_key.gif',
+    "gif": './find_key.gif',
 }
 
 couch = {
     "name": "couch",
     "type": "furniture",
-    'gif': '/Users/francescoserraino/project-1/looking_at_couch.gif',
+    'gif': './looking_at_couch.gif',
 }
 
 piano = {
     "name": "piano",
     "type": "furniture",
-    'gif': '/Users/francescoserraino/project-1/creepy_piano.gif',
+    'gif': './creepy_piano.gif',
 }
 
 double_bed = {
     "name": "double bed",
     "type": "furniture",
-    'gif': '/Users/francescoserraino/project-1/check_bed.gif',
+    'gif': './check_bed.gif',
 }
  
 dresser = {
     "name": "dresser",
     "type": "furniture",
-    'gif': '/Users/francescoserraino/project-1/dresser_gif.gif',
+    'gif': './dresser_gif.gif',
 }
 
 queen_bed = {
     "name": "queen bed",
     "type": "furniture",
-    'gif': '/Users/francescoserraino/project-1/check_bed.gif',
+    'gif': './check_bed.gif',
 }
 
 dining_table = {
     "name": "dining table",
     "type": "furniture",
-    'gif': '/Users/francescoserraino/project-1/check.gif',
+    'gif': './check.gif',
 }
 
 
@@ -266,16 +259,20 @@ def examine_item(item_name):
                         have_key = True
                 if(have_key):
                     output += "You unlock it with a key you have."
+                    gif_player(item[open_gif])
                     next_room = get_next_room_of_door(item, current_room)
                 else:
                     output += "It is locked but you don't have the key."
+                    gif_player(item[locked_gif])
             else:
                 if(item["name"] in object_relations and len(object_relations[item["name"]])>0):
                     item_found = object_relations[item["name"]].pop()
                     game_state["keys_collected"].append(item_found)
                     output += "You find " + item_found["name"] + "."
+                    gif_player(item[gif])
                 else:
                     output += "There isn't anything interesting about it."
+                    gif_player(item[gif])
             print(output)
             break
 
