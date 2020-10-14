@@ -29,84 +29,112 @@ def gif_player(animated_gif):
 
     pyglet.app.run()
 
-gif_player(r'../gifs/cant_open_door_2.gif')
-
-
-
 # define rooms and items
 door_a = {
     "name": "door a",
     "type": "door",
+    "open_gif": './gifs/open_door_1.gif',
+    "locked_gif": './gifs/cant_open_door.gif',
+    "open_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/closedoor.wav',
 }
 
 key_a = {
     "name": "key for door a",
     "type": "key",
     "target": door_a,
+    "gif": './gifs/find_key.gif',
 }
 
 door_b = {
     "name": "door b",
     "type": "door",
+    "open_gif": './gifs/open_door_aggresive.gif',
+    'locked_gif': './gifs/cant_open_door_2.gif',
+    "open_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/closedoor.wav',
 }
 
 key_b = {
     "name": "key for door b",
     "type": "key",
     "target": door_b,
+    "gif": './gifs/find_key.gif',
 }
 
 
 door_c = {
     "name": "door c",
     "type": "door",
+    "open_gif": './gifs/storm_through_door.gif',
+    "locked_gif": './gifs/cant_open_door.gif',
+    "open_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/closedoor.wav',
 }
 
 key_c = {
     "name": "key for door c",
     "type": "key",
     "target": door_c,
+    "gif": './gifs/find_key.gif',
 }
 
 door_d = {
     "name": "door d",
     "type": "door",
+    "open_gif": './gifs/exit_house.gif',
+    'locked_gif': './gifs/cant_open_door_2.gif',
+    "open_sound": './sounds/closedoor.wav',
+    "locked_sound": './sounds/closedoor.wav',
 }
 
 key_d = {
     "name": "key for door d",
     "type": "key",
     "target": door_d,
+    "gif": './gifs/find_key.gif',
 }
 
 couch = {
     "name": "couch",
     "type": "furniture",
+    'gif': './gifs/looking_at_couch.gif',
+    "sound": "./sounds/closedoor.wav",
 }
 
 piano = {
     "name": "piano",
     "type": "furniture",
+    "gif": "./gifs/creepy_piano.gif",
+    "sound": "./sounds/piano.wav",
 }
 
 double_bed = {
     "name": "double bed",
     "type": "furniture",
+    'gif': './gifs/check_bed.gif',
+    "sound": "./sounds/bedspring.wav",
 }
- 
+
 dresser = {
     "name": "dresser",
     "type": "furniture",
+    'gif': './gifs/dresser_gif.gif',
+    "sound": "./sounds/dresser.wav",
 }
 
 queen_bed = {
     "name": "queen bed",
     "type": "furniture",
+    'gif': './gifs/check_bed.gif',
+    "sound": "./sounds/snoring.wav",
 }
 
 dining_table = {
     "name": "dining table",
     "type": "furniture",
+    'gif': './gifs/check.gif',
+    "sound": "./sounds/piano.wav",
 }
 
 
@@ -247,13 +275,20 @@ def examine_item(item_name):
                     next_room = get_next_room_of_door(item, current_room)
                 else:
                     output += "It is locked but you don't have the key."
+                    play_sound(item["locked_sound"])
+                    gif_player(item["locked_gif"])
             else:
                 if(item["name"] in object_relations and len(object_relations[item["name"]])>0):
                     item_found = object_relations[item["name"]].pop()
                     game_state["keys_collected"].append(item_found)
                     output += "You find " + item_found["name"] + "."
+                    #print(item["gif"])
+                    play_sound(item["sound"])
+                    gif_player(item["gif"])
                 else:
                     output += "There isn't anything interesting about it."
+                    play_sound(item["sound"])
+                    gif_player(item["gif"])
             print(output)
             break
 
@@ -261,6 +296,8 @@ def examine_item(item_name):
         print("The item you requested is not found in the current room.")
     
     if(next_room and input("Do you want to go to the next room? Enter 'yes' or 'no'").strip() == 'yes'):
+        play_sound(item["open_sound"])
+        gif_player(item["open_gif"])
         play_room(next_room)
     else:
         play_room(current_room)
