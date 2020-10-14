@@ -2,6 +2,10 @@
 
 import pyglet
 
+def play_sound(soundfile): 
+    sound = pyglet.media.load(soundfile)
+    sound.play()
+
 def gif_player(animated_gif):
 #Takes and plays inserted gif 
     animation = pyglet.image.load_animation(animated_gif)
