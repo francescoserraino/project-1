@@ -29,6 +29,10 @@ def gif_player(animated_gif):
 
     pyglet.app.run()
 
+gif_player('/Users/uli/Documents/Bootcamp/02 Data Analytics/Week 1/project-1/gifs/cant_open_door_2.gif')
+
+
+
 # define rooms and items
 door_a = {
     "name": "door a",
