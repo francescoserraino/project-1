@@ -1,6 +1,16 @@
 #Write all additional functions here
 
 import pyglet
+import speech_recognition as sr
+
+def speech(question):
+    r = sr.Recognizer(e)    
+    with sr.Microphone() as source:
+        print(question)
+        audio = r.listen(source)
+        text = r.recognize_google(audio)
+        return text
+
 
 def play_sound(soundfile): 
     sound = pyglet.media.load(soundfile)
@@ -220,11 +230,13 @@ def play_room(room):
     else:
         print("You are now in " + room["name"])
         intended_action = input("What would you like to do? Type 'explore' or 'examine'?").strip()
+        # sr
         if intended_action == "explore":
             explore_room(room)
             play_room(room)
         elif intended_action == "examine":
             examine_item(input("What would you like to examine?").strip())
+            #sr
         else:
             print("Not sure what you mean. Type 'explore' or 'examine'.")
             play_room(room)
@@ -282,7 +294,6 @@ def examine_item(item_name):
                     item_found = object_relations[item["name"]].pop()
                     game_state["keys_collected"].append(item_found)
                     output += "You find " + item_found["name"] + "."
-                    #print(item["gif"])
                     play_sound(item["sound"])
                     gif_player(item["gif"])
                 else:
@@ -295,7 +306,8 @@ def examine_item(item_name):
     if(output is None):
         print("The item you requested is not found in the current room.")
     
-    if(next_room and input("Do you want to go to the next room? Enter 'yes' or 'no'").strip() == 'yes'):
+
+    if(next_room and speech("Do you want to go to the next room? Say 'yes' or 'no'") == 'yes'):
         play_sound(item["open_sound"])
         gif_player(item["open_gif"])
         play_room(next_room)
