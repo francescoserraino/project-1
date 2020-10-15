@@ -7,12 +7,14 @@ Created on Wed Oct 14 18:12:07 2020
 """
 
 import speech_recognition as sr
-for index, name in enumerate(sr.Microphone.list_microphone_names()):
-    print("Microphone with name \"{1}\" found for `Microphone(device_index={0})`".format(index, name))
 
-r = sr.Recognizer()    
-with sr.Microphone() as source:
-    print("Enter anything: ")
-    audio = r.listen(source)
-    text = r.recognize_google(audio)
-    print(text)
+def speech():
+    r = sr.Recognizer()    
+    with sr.Microphone() as source:
+        audio = r.listen(source)
+        text = r.recognize_google(audio)
+        return text
+
+print('say yes')    
+if (speech()) == 'yes':
+    print('you said yes!')
