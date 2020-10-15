@@ -26,17 +26,21 @@ def gif_player(animated_gif):
     h = animSprite.height
 
     window = pyglet.window.Window(width=w, height=h)
-
     r,g,b,alpha = 0.5,0.5,0.8,0.5
 
 
     pyglet.gl.glClearColor(r,g,b,alpha)
-
+    
     @window.event
     def on_draw():
         window.clear()
         animSprite.draw()
+        
+    def close(event):
+        window.close()
 
+    pyglet.clock.schedule_once(close, 5.0)
+        
     pyglet.app.run()
 
 # define rooms and items
