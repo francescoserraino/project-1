@@ -4,7 +4,7 @@ import pyglet
 import speech_recognition as sr
 
 def speech(question):
-    r = sr.Recognizer(e)    
+    r = sr.Recognizer()    
     with sr.Microphone() as source:
         print(question)
         audio = r.listen(source)
@@ -144,7 +144,7 @@ dining_table = {
     "name": "dining table",
     "type": "furniture",
     'gif': './gifs/check_table.gif',
-    "sound": "./sounds/crash.wav",
+    "sound": "./sounds/glassbreak.wav",
 }
 
 
@@ -229,14 +229,25 @@ def play_room(room):
         print("Congrats! You escaped the room!")
     else:
         print("You are now in " + room["name"])
-        intended_action = input("What would you like to do? Type 'explore' or 'examine'?").strip()
+        intended_action = input("What would you like to do? Type 'explore', 'examine' or 'speech' for speech recognition?").strip()
         # sr
         if intended_action == "explore":
             explore_room(room)
             play_room(room)
         elif intended_action == "examine":
             examine_item(input("What would you like to examine?").strip())
-            #sr
+        elif intended_action == "speech":
+            result = speech("Say examine or explore")
+            #print(result)
+            if result == 'examine':
+                examine_item(input("What would you like to examine?").strip())
+            elif result == 'explore' or 'explorer':
+                explore_room(room)
+                play_room(room)
+            else:
+                print("Not sure what you mean. Type 'explore' or 'examine'.")
+                play_room(room)
+            linebreak()
         else:
             print("Not sure what you mean. Type 'explore' or 'examine'.")
             play_room(room)
@@ -306,13 +317,34 @@ def examine_item(item_name):
     if(output is None):
         print("The item you requested is not found in the current room.")
     
-
-    if(next_room and speech("Do you want to go to the next room? Say 'yes' or 'no'") == 'yes'):
-        play_sound(item["open_sound"])
-        gif_player(item["open_gif"])
-        play_room(next_room)
+    result = ''
+    result2 = ''
+    if next_room:        
+        result = input("Do you want to go to the next room? Type 'yes', 'no' or 'speech' for speech recognition")
+        if result == 'yes':
+            play_sound(item["open_sound"])
+            gif_player(item["open_gif"])
+            play_room(next_room)
+        elif result == 'speech':
+            try:
+                result2 = speech("Do you want to go to the next room? Say 'yes', 'no'")
+                if result2 == 'yes':
+                    play_sound(item["open_sound"])
+                    gif_player(item["open_gif"])
+                    play_room(next_room)
+                elif result2 == 'no':
+                    play_room(current_room)
+                else:
+                    print(f"You said {result2},this is not an option, you are back in {current_room['name']}")
+                    play_room(current_room)
+            except:
+                print(f"We did not understand what you said, you are back in {current_room['name']}")
+                play_room(current_room) 
+                
+        else:
+            play_room(current_room)       
     else:
-        play_room(current_room)
+        play_room(current_room)   
 
 game_state = INIT_GAME_STATE.copy()
 
